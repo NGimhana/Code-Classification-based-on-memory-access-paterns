@@ -1,0 +1,15 @@
+{
+    "project_name" : "blackscholes.c",
+    "file_name" : "blackscholes.c",
+    "memory_access_pattern" : [
+        {
+            "name": "constant",
+            "line_num": ["67", "68", "71", "72", "73", "74", "75", "76"] 
+        },
+        {
+            "name": "delta",
+            "line_num": []
+        }
+    ]
+
+}

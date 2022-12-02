@@ -1,0 +1,14 @@
+code_snippet,memory_access_pattern,constant,delta,pointer_chase,indirect_delta,indirect_index,constant_plus_offset_reference
+int *ptr,[constant],1,0,0,0,0,0
+OptionData *data,[constant],1,0,0,0,0,0
+fptype *prices,[constant],1,0,0,0,0,0
+int    * otype,[constant],1,0,0,0,0,0
+fptype * sptprice,[constant],1,0,0,0,0,0
+fptype * strike,[constant],1,0,0,0,0,0
+fptype * rate,[constant],1,0,0,0,0,0
+fptype * volatility,[constant],1,0,0,0,0,0
+fptype * otime,[constant],1,0,0,0,0,0
+sign = 1,[constant],1,0,0,0,0,0
+sign = 0,[constant],1,0,0,0,0,0
+xK2 = 1.0 + xK2,[Delta],0,1,0,0,0,0
+xNPrimeofX = xNPrimeofX * inv_sqrt_2xPI,"[constant, delta]",1,1,0,0,0,0
