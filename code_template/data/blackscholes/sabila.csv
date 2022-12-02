@@ -1,2 +1,15 @@
 Code_Snippet,Memory_Access_Pattern
 int *ptr,constant
+OptionData *data,[constant]
+fptype *prices,[constant]
+int    * otype,[constant]
+fptype * sptprice,[constant]
+fptype * strike,[constant]
+fptype * rate,[constant]
+fptype * volatility,[constant]
+fptype * otime,[constant]
+sign = 1,[constant]
+sign = 0,[constant]
+xK2 = 1.0 + xK2,[stride]
+xNPrimeofX = xNPrimeofX * inv_sqrt_2xPI,[constant,stride]
+
