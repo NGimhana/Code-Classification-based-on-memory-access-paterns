@@ -1,38 +1,38 @@
-code_snippet,memory_access_pattern,constant,delta,pointer_chase,indirect_delta,indirect_index,constant_plus_offset_reference
-int *ptr,[constant],1,0,0,0,0,0
-OptionData *data,[constant],1,0,0,0,0,0
-fptype *prices,[constant],1,0,0,0,0,0
-int    * otype,[constant],1,0,0,0,0,0
-fptype * sptprice,[constant],1,0,0,0,0,0
-fptype * strike,[constant],1,0,0,0,0,0
-fptype * rate,[constant],1,0,0,0,0,0
-fptype * volatility,[constant],1,0,0,0,0,0
-fptype * otime,[constant],1,0,0,0,0,0
-sign = 1,[constant],1,0,0,0,0,0
-sign = 0,[constant],1,0,0,0,0,0
-xK2 = 1.0 + xK2,[delta],0,1,0,0,0,0
-xNPrimeofX = xNPrimeofX * inv_sqrt_2xPI,[constant, delta],1,1,0,0,0,0
-xK2 = 0.2316419 * xInput,[constant,delta],1,1,0,0,0,0
-xK2 = 1.0 + xK2,[delta],0,1,0,0,0,0
-xK2 = 1.0 / xK2,[constant],1,0,0,0,0,0
-xK2_2 = xK2 * xK2,[constant],1,0,0,0,0,0
-xK2_3 = xK2_2 * xK2,[constant],1,0,0,0,0,0
-xK2_4 = xK2_3 * xK2,[constant],1,0,0,0,0,0
-xK2_5 = xK2_4 * xK2,[constant],1,0,0,0,0,0
-xLocal_1 = xK2 * 0.319381530,[constant],1,0,0,0,0,0
-xLocal_2 = xK2_2 * (-0.356563782),[constant],1,0,0,0,0,0
-xLocal_3 = xK2_3 * 1.781477937,[constant],1,0,0,0,0,0
-xLocal_2 = xLocal_2 + xLocal_3,[constant,delta],1,1,0,0,0,0
-xLocal_3 = xK2_4 * (-1.821255978),[constant,delta],1,1,0,0,0,0
-xLocal_3 = xK2_5 * 1.330274429,[constant],1,1,0,0,0,0
-xLocal_1 = xLocal_2 + xLocal_1,[delta],0,1,0,0,0,0
-xLocal   = xLocal_1 * xNPrimeofX,[constant,delta],1,1,0,0,0,0
-xLocal   = 1.0 - xLocal,[delta],0,1,0,0,0,0
-OutputX  = xLocal,[constant],1,0,0,0,0,0
-OutputX = 1.0 - OutputX,[delta],0,1,0,0,0,0
-xStockPrice = sptprice,[constant],1,0,0,0,0,0
-xStrikePrice = strike,[constant],1,0,0,0,0,0
-xRiskFreeRate = rate,[constant],1,0,0,0,0,0
-xVolatility = volatility,[constant],1,0,0,0,0,0
-xTime = time,[constant],1,0,0,0,0,0
-xSqrtTime = sqrt(xTime),[constant],1,0,0,0,0,0
+code_snippet,memory_access_pattern,constant,delta,pointer_chase,indirect_delta,indirect_index,constant_plus_offset_reference,
+int *ptr,[constant],1,0,0,0,0,0,0
+OptionData *data,[constant],1,0,0,0,0,0,0
+fptype *prices,[constant],1,0,0,0,0,0,0
+int    * otype,[constant],1,0,0,0,0,0,0
+fptype * sptprice,[constant],1,0,0,0,0,0,0
+fptype * strike,[constant],1,0,0,0,0,0,0
+fptype * rate,[constant],1,0,0,0,0,0,0
+fptype * volatility,[constant],1,0,0,0,0,0,0
+fptype * otime,[constant],1,0,0,0,0,0,0
+sign = 1,[constant],1,0,0,0,0,0,0
+sign = 0,[constant],1,0,0,0,0,0,0
+xK2 = 1.0 + xK2,[delta],0,1,0,0,0,0,0
+xNPrimeofX = xNPrimeofX * inv_sqrt_2xPI,[constant delta],0,1,1,0,0,0,0
+xK2 = 0.2316419 * xInput,[constant delta],0,1,1,0,0,0,0
+xK2 = 1.0 + xK2,[delta],0,1,0,0,0,0,0
+xK2 = 1.0 / xK2,[constant],1,0,0,0,0,0,0
+xK2_2 = xK2 * xK2,[constant],1,0,0,0,0,0,0
+xK2_3 = xK2_2 * xK2,[constant],1,0,0,0,0,0,0
+xK2_4 = xK2_3 * xK2,[constant],1,0,0,0,0,0,0
+xK2_5 = xK2_4 * xK2,[constant],1,0,0,0,0,0,0
+xLocal_1 = xK2 * 0.319381530,[constant],1,0,0,0,0,0,0
+xLocal_2 = xK2_2 * (-0.356563782),[constant],1,0,0,0,0,0,0
+xLocal_3 = xK2_3 * 1.781477937,[constant],1,0,0,0,0,0,0
+xLocal_2 = xLocal_2 + xLocal_3,[constant delta],0,1,1,0,0,0,0
+xLocal_3 = xK2_4 * (-1.821255978),[constant delta],0,1,1,0,0,0,0
+xLocal_3 = xK2_5 * 1.330274429,[constant],1,1,0,0,0,0,0
+xLocal_1 = xLocal_2 + xLocal_1,[delta],0,1,0,0,0,0,0
+xLocal   = xLocal_1 * xNPrimeofX,[constant delta],0,1,1,0,0,0,0
+xLocal   = 1.0 - xLocal,[delta],0,1,0,0,0,0,0
+OutputX  = xLocal,[constant],1,0,0,0,0,0,0
+OutputX = 1.0 - OutputX,[delta],0,1,0,0,0,0,0
+xStockPrice = sptprice,[constant],1,0,0,0,0,0,0
+xStrikePrice = strike,[constant],1,0,0,0,0,0,0
+xRiskFreeRate = rate,[constant],1,0,0,0,0,0,0
+xVolatility = volatility,[constant],1,0,0,0,0,0,0
+xTime = time,[constant],1,0,0,0,0,0,0
+xSqrtTime = sqrt(xTime),[constant],1,0,0,0,0,0,0
