@@ -40,7 +40,7 @@ logValues = log( sptprice / strike ),[constant],1,0,0,0,0,0
 xLogTerm = logValues,[constant],1,0,0,0,0,0
 xPowerTerm = xVolatility * xVolatility,[constant],1,0,0,0,0,0
 xPowerTerm = xPowerTerm * 0.5,[constant],1,0,0,0,0,0
-xD1 = xRiskFreeRate + xPowerTerm,[constant,delta],1,1,0,0,0,0
+xD1 = xRiskFreeRate + xPowerTerm,[constant,constant_plus_offset_reference],1,0,0,0,0,1
 xD1 = xD1 * xTime,[constant],1,0,0,0,0,0
 xD1 = xD1 + xLogTerm,[constant,delta],1,1,0,0,0,0
 xDen = xVolatility * xSqrtTime,[constant],1,0,0,0,0,0
@@ -97,3 +97,14 @@ int *tids,[constant],1,0,0,0,0,0
 tids = (int *) malloc (nThreads * sizeof(int)),[constant],1,0,0,0,0,0
 tids[i]=i,[constant],1,0,0,0,0,0
 CREATE_WITH_ARG(bs_thread, &tids[i]),[constant,indirect_delta],[1,0,0,1,0,0]
+fprintf(stderr,"Error on %d. Computed=%.5f, Ref=%.5f, Delta=%.5f\n", i, price, data[i].DGrefval, priceDelta),[constant,indirect_delta],[1,0,0,1,0,0]
+printf("ERROR: Unable to open file `%s'.\n", inputFile),[constant],1,0,0,0,0,0
+printf("ERROR: Unable to read from file `%s'.\n", inputFile),[constant],1,0,0,0,0,0
+printf("Num of Options: %d\n", numOptions),[constant],1,0,0,0,0,0
+printf("Num of Runs: %d\n", NUM_RUNS),[constant],1,0,0,0,0,0
+printf("Size of data: %d\n", numOptions * (sizeof(OptionData) + sizeof(int))),[constant,delta],1,1,0,0,0,0
+printf("ERROR: Unable to open file `%s'.\n", outputFile),[constant],1,0,0,0,0,0
+printf("ERROR: Unable to write to file `%s'.\n", outputFile),[constant],1,0,0,0,0,0
+file = fopen(outputFile, "w"),[constant,pointer_chase],1,0,1,0,0,0
+rv = fprintf(file, "%i\n", numOptions),[constant],1,0,0,0,0,0
+rv = fprintf(file, "%.18f\n", prices[i]),[constant,indirect_delta],[1,0,0,1,0,0]

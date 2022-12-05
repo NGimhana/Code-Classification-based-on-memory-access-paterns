@@ -1,0 +1,55 @@
+NegNofXd1 = (1.0 - NofXd1)
+NegNofXd2 = (1.0 - NofXd2)
+fprintf(stderr,"Error on %d. Computed=%.5f, Ref=%.5f, Delta=%.5f\n",
+               i, price, data[i].DGrefval, priceDelta)
+tbb::parallel_for(tbb::blocked_range<int>(0, numOptions), doall, a)
+
+
+    //Read input data from file
+    file = fopen(inputFile, "r");
+    if(file == NULL) {
+      printf("ERROR: Unable to open file `%s'.\n", inputFile);
+      exit(1);
+    }
+    rv = fscanf(file, "%i", &numOptions);
+    if(rv != 1) {
+      printf("ERROR: Unable to read from file `%s'.\n", inputFile);
+      fclose(file);
+      exit(1);
+    }
+    if(nThreads > numOptions) {
+      printf("WARNING: Not enough work, reducing number of threads to match number of options.\n");
+
+printf("ERROR: Unable to read from file `%s'.\n", inputFile)
+
+printf("Num of Options: %d\n", numOptions);
+    printf("Num of Runs: %d\n", NUM_RUNS)
+
+ printf("Size of data: %d\n", numOptions * (sizeof(OptionData) + sizeof(int)));
+
+ WaitForMultipleObjects(nThreads, threads, TRUE, INFINITE)
+  WAIT_FOR_END(nThreads);
+    free(tids);
+     int tid=0;
+        omp_set_num_threads(nThreads);
+        bs_thread(&tid);
+
+
+    file = fopen(outputFile, "w");
+    if(file == NULL) {
+      printf("ERROR: Unable to open file `%s'.\n", outputFile);
+      exit(1);
+    }
+    rv = fprintf(file, "%i\n", numOptions);
+    if(rv < 0) {
+      printf("ERROR: Unable to write to file `%s'.\n", outputFile);
+      fclose(file);
+      exit(1);
+    }
+    for(i=0; i<numOptions; i++) {
+      rv = fprintf(file, "%.18f\n", prices[i]);
+      if(rv < 0) {
+        printf("ERROR: Unable to write to file `%s'.\n", outputFile);
+        fclose(file);
+        exit(1);
+      }
