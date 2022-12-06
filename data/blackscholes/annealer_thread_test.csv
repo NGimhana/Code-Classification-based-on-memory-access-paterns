@@ -1,0 +1,15 @@
+routing_cost_t delta_cost = calculate_delta_routing_cost(a b),[constant pointer_chase],1,0,1,0,0,0
+move_decision_t is_good_move = accept_move(delta_cost  T  &rng),[constant pointer_chase],1,0,1,0,0,0
+accepted_bad_moves++,[constant delta],1,1,0,0,0,0
+_netlist->swap_locations(a b),[constant pointer_chase],1,0,1,0,0,0
+accepted_bad_moves++,[constant delta],1,1,0,0,0,0
+accepted_good_moves++,[constant delta],1,1,0,0,0,0
+temp_steps_completed++,[constant delta],1,1,0,0,0,0
+double random_value = rng->drand(),[constant pointer_chase],1,0,1,0,0,0
+double boltzman = exp(- delta_cost/T),[constant],1,0,0,0,0,0
+location_t* a_loc = a->present_loc.Get(),[constant pointer_chase],1,0,1,0,0,0
+location_t* b_loc = b->present_loc.Get(),[constant pointer_chase],1,0,1,0,0,0
+routing_cost_t delta_cost = a->swap_cost(a_loc  b_loc),[constant pointer_chase],1,0,1,0,0,0
+delta_cost += b->swap_cost(b_loc  a_loc),[constant pointer_chase],1,0,1,0,0,0
+rv = _keep_going_global_flag && (accepted_good_moves > accepted_bad_moves),[constant],1,0,0,0,0,0
+rv = temp_steps_completed < _number_temp_steps,[constant],1,0,0,0,0,0
