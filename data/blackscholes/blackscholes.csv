@@ -11,8 +11,8 @@ fptype * otime,[constant],1,0,0,0,0,0
 sign = 1,[constant],1,0,0,0,0,0
 sign = 0,[constant],1,0,0,0,0,0
 xK2 = 1.0 + xK2,[delta],0,1,0,0,0,0
-xNPrimeofX = xNPrimeofX * inv_sqrt_2xPI,[constant, delta],1,1,0,0,0,0
-xK2 = 0.2316419 * xInput,[constant,delta],1,1,0,0,0,0
+xNPrimeofX = xNPrimeofX * inv_sqrt_2xPI,[constant  delta],1,1,0,0,0,0
+xK2 = 0.2316419 * xInput,[constant delta],1,1,0,0,0,0
 xK2 = 1.0 + xK2,[delta],0,1,0,0,0,0
 xK2 = 1.0 / xK2,[constant],1,0,0,0,0,0
 xK2_2 = xK2 * xK2,[constant],1,0,0,0,0,0
@@ -22,11 +22,11 @@ xK2_5 = xK2_4 * xK2,[constant],1,0,0,0,0,0
 xLocal_1 = xK2 * 0.319381530,[constant],1,0,0,0,0,0
 xLocal_2 = xK2_2 * (-0.356563782),[constant],1,0,0,0,0,0
 xLocal_3 = xK2_3 * 1.781477937,[constant],1,0,0,0,0,0
-xLocal_2 = xLocal_2 + xLocal_3,[constant,delta],1,1,0,0,0,0
-xLocal_3 = xK2_4 * (-1.821255978),[constant,delta],1,1,0,0,0,0
+xLocal_2 = xLocal_2 + xLocal_3,[constant delta],1,1,0,0,0,0
+xLocal_3 = xK2_4 * (-1.821255978),[constant delta],1,1,0,0,0,0
 xLocal_3 = xK2_5 * 1.330274429,[constant],1,1,0,0,0,0
 xLocal_1 = xLocal_2 + xLocal_1,[delta],0,1,0,0,0,0
-xLocal   = xLocal_1 * xNPrimeofX,[constant,delta],1,1,0,0,0,0
+xLocal   = xLocal_1 * xNPrimeofX,[constant delta],1,1,0,0,0,0
 xLocal   = 1.0 - xLocal,[delta],0,1,0,0,0,0
 OutputX  = xLocal,[constant],1,0,0,0,0,0
 OutputX = 1.0 - OutputX,[delta],0,1,0,0,0,0
@@ -40,71 +40,71 @@ logValues = log( sptprice / strike ),[constant],1,0,0,0,0,0
 xLogTerm = logValues,[constant],1,0,0,0,0,0
 xPowerTerm = xVolatility * xVolatility,[constant],1,0,0,0,0,0
 xPowerTerm = xPowerTerm * 0.5,[constant],1,0,0,0,0,0
-xD1 = xRiskFreeRate + xPowerTerm,[constant,constant_plus_offset_reference],1,0,0,0,0,1
+xD1 = xRiskFreeRate + xPowerTerm,[constant constant_plus_offset_reference],1,0,0,0,0,1
 xD1 = xD1 * xTime,[constant],1,0,0,0,0,0
-xD1 = xD1 + xLogTerm,[constant,delta],1,1,0,0,0,0
+xD1 = xD1 + xLogTerm,[constant delta],1,1,0,0,0,0
 xDen = xVolatility * xSqrtTime,[constant],1,0,0,0,0,0
 xD1 = xD1 / xDen,[constant],1,0,0,0,0,0
-xD2 = xD1 -  xDen,[constant,delta],1,1,0,0,0,0
-d1 = xD1,[constant,pointer_chase],1,0,1,0,0,0
-d2 = xD2,[constant,pointer_chase],1,0,1,0,0,0
+xD2 = xD1 -  xDen,[constant delta],1,1,0,0,0,0
+d1 = xD1,[constant pointer_chase],1,0,1,0,0,0
+d2 = xD2,[constant pointer_chase],1,0,1,0,0,0
 NofXd1 = CNDF( d1 ),[constant],1,0,0,0,0,0
 NofXd2 = CNDF( d2 ),[constant],1,0,0,0,0,0
 FutureValueX = strike * ( exp( -(rate)*(time) ) ),[constant],1,0,0,0,0,0
-OptionPrice = (sptprice * NofXd1) - (FutureValueX * NofXd2),[constant,delta],1,1,0,0,0,0
-Neprice = BlkSchlsEqEuroNoDiv( sptprice[i], strike[i], rate[i], volatility[i], otime[i], otype[i], 0),[constant,indirect_delta],[1,0,0,1,0,0]
+OptionPrice = (sptprice * NofXd1) - (FutureValueX * NofXd2),[constant delta],1,1,0,0,0,0
+Neprice = BlkSchlsEqEuroNoDiv( sptprice[i]  strike[i]  rate[i]  volatility[i]  otime[i]  otype[i]  0),[constant indirect_delta],1,0,0,1,0,0
 prices[i] = price,[constant],1,0,0,0,0,0
 NegNofXd1 = (1.0 - NofXd1),[constant],1,0,0,0,0,0
 NegNofXd2 = (1.0 - NofXd2),[constant],1,0,0,0,0,0
-fptype priceDelta = data[i].DGrefval - price,[constant,indirect_index],[1,0,0,0,1,0]
-numError ++,[constant,delta],1,1,0,0,0,0
+fptype priceDelta = data[i].DGrefval - price,[constant indirect_index],1,0,0,0,1,0
+numError ++,[constant delta],1,1,0,0,0,0
 int tid = *(int *)tid_ptr,[constant],1,0,0,0,0,0
 int start = tid * (numOptions / nThreads),[constant],1,0,0,0,0,0
-int end = start + (numOptions / nThreads),[constant,delta],1,1,0,0,0,0
-price = BlkSchlsEqEuroNoDiv( sptprice[i], strike[i], rate[i], volatility[i], otime[i], otype[i], 0),[constant,indirect_delta],[1,0,0,1,0,0]
-printf("Error on %d. Computed=%.5f, Ref=%.5f, Delta=%.5f\n",i, price, data[i].DGrefval, priceDelta),[constant,indirect_delta],[1,0,0,1,0,0]
+int end = start + (numOptions / nThreads),[constant delta],1,1,0,0,0,0
+price = BlkSchlsEqEuroNoDiv( sptprice[i]  strike[i]  rate[i]  volatility[i]  otime[i]  otype[i]  0),[constant indirect_delta],1,0,0,1,0,0
+printf("Error on %d. Computed=%.5f  Ref=%.5f  Delta=%.5f\n" i  price  data[i].DGrefval  priceDelta),[constant indirect_delta],1,0,0,1,0,0
 FILE *file,[constant],1,0,0,0,0,0
 fptype * buffer,[constant],1,0,0,0,0,0
 int * buffer2,[constant],1,0,0,0,0,0
-printf("Usage:\n\t%s <nthreads> <inputFile> <outputFile>\n", argv[0]),[constant,indirect_delta],[1,0,0,1,0,0]
-nThreads = atoi(argv[1]),[constant,indirect_delta],[1,0,0,1,0,0]
-char *inputFile = argv[2],[constant,indirect_delta],[1,0,0,1,0,0]
-char *outputFile = argv[3],[constant,indirect_delta],[1,0,0,1,0,0]
+printf("Usage:\n\t%s <nthreads> <inputFile> <outputFile>\n"  argv[0]),[constant indirect_delta],1,0,0,1,0,0
+nThreads = atoi(argv[1]),[constant indirect_delta],1,0,0,1,0,0
+char *inputFile = argv[2],[constant indirect_delta],1,0,0,1,0,0
+char *outputFile = argv[3],[constant indirect_delta],1,0,0,1,0,0
 data = (OptionData*)malloc(numOptions*sizeof(OptionData)),[constant],1,0,0,0,0,0
 prices = (fptype*)malloc(numOptions*sizeof(fptype)),[constant],1,0,0,0,0,0
-rv = fscanf(file, "%f %f %f %f %f %f %c %f %f", &data[loopnum].s, &data[loopnum].strike, &data[loopnum].r, &data[loopnum].divq, &data[loopnum].v, &data[loopnum].t, &data[loopnum].OptionType, &data[loopnum].divs, &data[loopnum].DGrefval),[constant,indirect_delta],[1,0,0,1,0,0]
+rv = fscanf(file  "%f %f %f %f %f %f %c %f %f"  &data[loopnum].s  &data[loopnum].strike  &data[loopnum].r  &data[loopnum].divq  &data[loopnum].v  &data[loopnum].t  &data[loopnum].OptionType  &data[loopnum].divs  &data[loopnum].DGrefval),[constant indirect_delta],1,0,0,1,0,0
 data = (OptionData*)malloc(numOptions*sizeof(OptionData)),[constant],1,0,0,0,0,0
-buffer = (fptype *) malloc(5 * numOptions * sizeof(fptype) + PAD),[constant,delta],1,1,0,0,0,0
-sptprice = (fptype *) (((unsigned long long)buffer + PAD) & ~(LINESIZE - 1)),[constant,delta],1,1,0,0,0,0
+buffer = (fptype *) malloc(5 * numOptions * sizeof(fptype) + PAD),[constant delta],1,1,0,0,0,0
+sptprice = (fptype *) (((unsigned long long)buffer + PAD) & ~(LINESIZE - 1)),[constant delta],1,1,0,0,0,0
 strike = sptprice + numOptions,[constant],1,0,0,0,0,0
 rate = strike + numOptions,[constant],1,0,0,0,0,0
 otime = volatility + numOptions,[constant],1,0,0,0,0,0
-buffer2 = (int *) malloc(numOptions * sizeof(fptype) + PAD),[constant,delta],1,1,0,0,0,0
-otype = (int *) (((unsigned long long)buffer2 + PAD) & ~(LINESIZE - 1)),[constant,delta],1,1,0,0,0,0
-otype[i]      = (data[i].OptionType == 'P') ? 1 : 0,[constant,indirect_delta],[1,0,0,1,0,0]
-sptprice[i]   = data[i].s,[constant,indirect_delta],[1,0,0,1,0,0]
-strike[i]     = data[i].strike,[constant,indirect_delta],[1,0,0,1,0,0]
-rate[i]       = data[i].r,[constant,indirect_delta],[1,0,0,1,0,0]
-volatility[i] = data[i].v,[constant,indirect_delta],[1,0,0,1,0,0]
-otime[i]      = data[i].t,[constant,indirect_delta],[1,0,0,1,0,0]
+buffer2 = (int *) malloc(numOptions * sizeof(fptype) + PAD),[constant delta],1,1,0,0,0,0
+otype = (int *) (((unsigned long long)buffer2 + PAD) & ~(LINESIZE - 1)),[constant delta],1,1,0,0,0,0
+otype[i]      = (data[i].OptionType == 'P') ? 1 : 0,[constant indirect_delta],1,0,0,1,0,0
+sptprice[i]   = data[i].s,[constant indirect_delta],1,0,0,1,0,0
+strike[i]     = data[i].strike,[constant indirect_delta],1,0,0,1,0,0
+rate[i]       = data[i].r,[constant indirect_delta],1,0,0,1,0,0
+volatility[i] = data[i].v,[constant indirect_delta],1,0,0,1,0,0
+otime[i]      = data[i].t,[constant indirect_delta],1,0,0,1,0,0
 HANDLE *threads,[constant],1,0,0,0,0,0
 int *nums,[constant],1,0,0,0,0,0
 threads = (HANDLE *) malloc (nThreads * sizeof(HANDLE)),[constant],1,0,0,0,0,0
 nums = (int *) malloc (nThreads * sizeof(int)),[constant],1,0,0,0,0,0
-nums[i] = i,[constant,indirect_delta],[1,0,0,1,0,0]
-threads[i] = CreateThread(0, 0, bs_thread, &nums[i], 0, 0),[constant,indirect_delta],[1,0,0,1,0,0]
+nums[i] = i,[constant indirect_delta],1,0,0,1,0,0
+threads[i] = CreateThread(0  0  bs_thread  &nums[i]  0  0),[constant indirect_delta],1,0,0,1,0,0
 int *tids,[constant],1,0,0,0,0,0
 tids = (int *) malloc (nThreads * sizeof(int)),[constant],1,0,0,0,0,0
 tids[i]=i,[constant],1,0,0,0,0,0
-CREATE_WITH_ARG(bs_thread, &tids[i]),[constant,indirect_delta],[1,0,0,1,0,0]
-fprintf(stderr,"Error on %d. Computed=%.5f, Ref=%.5f, Delta=%.5f\n", i, price, data[i].DGrefval, priceDelta),[constant,indirect_delta],[1,0,0,1,0,0]
-printf("ERROR: Unable to open file `%s'.\n", inputFile),[constant],1,0,0,0,0,0
-printf("ERROR: Unable to read from file `%s'.\n", inputFile),[constant],1,0,0,0,0,0
-printf("Num of Options: %d\n", numOptions),[constant],1,0,0,0,0,0
-printf("Num of Runs: %d\n", NUM_RUNS),[constant],1,0,0,0,0,0
-printf("Size of data: %d\n", numOptions * (sizeof(OptionData) + sizeof(int))),[constant,delta],1,1,0,0,0,0
-printf("ERROR: Unable to open file `%s'.\n", outputFile),[constant],1,0,0,0,0,0
-printf("ERROR: Unable to write to file `%s'.\n", outputFile),[constant],1,0,0,0,0,0
-file = fopen(outputFile, "w"),[constant,pointer_chase],1,0,1,0,0,0
-rv = fprintf(file, "%i\n", numOptions),[constant],1,0,0,0,0,0
-rv = fprintf(file, "%.18f\n", prices[i]),[constant,indirect_delta],[1,0,0,1,0,0]
+CREATE_WITH_ARG(bs_thread  &tids[i]),[constant indirect_delta],1,0,0,1,0,0
+fprintf(stderr "Error on %d. Computed=%.5f  Ref=%.5f  Delta=%.5f\n"  i  price  data[i].DGrefval  priceDelta),[constant indirect_delta],1,0,0,1,0,0
+printf("ERROR: Unable to open file `%s'.\n"  inputFile),[constant],1,0,0,0,0,0
+printf("ERROR: Unable to read from file `%s'.\n"  inputFile),[constant],1,0,0,0,0,0
+printf("Num of Options: %d\n"  numOptions),[constant],1,0,0,0,0,0
+printf("Num of Runs: %d\n"  NUM_RUNS),[constant],1,0,0,0,0,0
+printf("Size of data: %d\n"  numOptions * (sizeof(OptionData) + sizeof(int))),[constant delta],1,1,0,0,0,0
+printf("ERROR: Unable to open file `%s'.\n"  outputFile),[constant],1,0,0,0,0,0
+printf("ERROR: Unable to write to file `%s'.\n"  outputFile),[constant],1,0,0,0,0,0
+file = fopen(outputFile  "w"),[constant pointer_chase],1,0,1,0,0,0
+rv = fprintf(file  "%i\n"  numOptions),[constant],1,0,0,0,0,0
+rv = fprintf(file  "%.18f\n"  prices[i]),[constant indirect_delta],1,0,0,1,0,0
