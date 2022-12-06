@@ -62,7 +62,7 @@ int tid = *(int *)tid_ptr,[constant],1,0,0,0,0,0
 int start = tid * (numOptions / nThreads),[constant],1,0,0,0,0,0
 int end = start + (numOptions / nThreads),[constant delta],1,1,0,0,0,0
 price = BlkSchlsEqEuroNoDiv( sptprice[i]  strike[i]  rate[i]  volatility[i]  otime[i]  otype[i]  0),[constant indirect_delta],1,0,0,1,0,0
-printf("Error on %d. Computed=%.5f  Ref=%.5f  Delta=%.5f\n" i  price  data[i].DGrefval  priceDelta),[constant indirect_delta],1,0,0,1,0,0
+printf(Error on %d. Computed=%.5f  Ref=%.5f  Delta=%.5f\n i  price  data[i].DGrefval  priceDelta),[constant indirect_delta],1,0,0,1,0,0
 FILE *file,[constant],1,0,0,0,0,0
 fptype * buffer,[constant],1,0,0,0,0,0
 int * buffer2,[constant],1,0,0,0,0,0
