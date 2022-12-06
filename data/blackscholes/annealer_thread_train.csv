@@ -8,7 +8,7 @@ int temp_steps_completed=0,[constant],1,0,0,0,0,0
 T = T / 1.5,[constant],1,0,0,0,0,0
 accepted_good_moves = 0,[constant],1,0,0,0,0,0
 accepted_bad_moves = 0,[constant],1,0,0,0,0,0
-while(keep_going(temp_steps_completed, accepted_good_moves, accepted_bad_moves)),[constant],1,0,0,0,0,0
+while(keep_going(temp_steps_completed  accepted_good_moves  accepted_bad_moves)),[constant],1,0,0,0,0,0
 a = b,[constant pointer_chase],1,0,1,0,0,0
 a_id = b_id,[constant pointer_chase],1,0,1,0,0,0
 b = _netlist->get_random_element(&b_id  a_id  &rng),[constant],1,0,0,0,0,0

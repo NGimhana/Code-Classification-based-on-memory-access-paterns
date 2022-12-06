@@ -1,3 +1,4 @@
+code_snippet,memory_access_pattern,constant,delta,pointer_chase,indirect_delta,indirect_index,constant_plus_offset_reference
 routing_cost_t delta_cost = calculate_delta_routing_cost(a b),[constant pointer_chase],1,0,1,0,0,0
 move_decision_t is_good_move = accept_move(delta_cost  T  &rng),[constant pointer_chase],1,0,1,0,0,0
 accepted_bad_moves++,[constant delta],1,1,0,0,0,0
